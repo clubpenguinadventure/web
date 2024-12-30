@@ -15,8 +15,6 @@ app.get('/:page?', (req, res) => {
     const page = req.params.page || "";
     const filePath = path.join(__dirname, 'src/pages', `${page}/index.html`);
 
-    console.log(filePath);
-
     // Read the page content, wrap it with HEADER and FOOTER, and serve it
     fs.readFile(filePath, 'utf8', (err, content) => {
         if (err) {
@@ -31,5 +29,5 @@ app.get('/:page?', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.info(`Server is running on http://localhost:${PORT}`);
 });
