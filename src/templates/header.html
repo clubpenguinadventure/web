@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="/cdn/ico/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/cdn/ico/favicon.svg" />
+    <link rel="shortcut icon" href="/cdn/ico/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/cdn/ico/apple-touch-icon.png" />
+    <title>Club Penguin Adventure</title>
+    <link rel="stylesheet" href="/cdn/styles/styles.css" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div id="header" class="header">
+            <div class="header-inner">
+                <a href="/">Home</a>
+                <a href="/create">Create a Penguin</a>
+                <a href="/blog">What's New?</a>
+                <a href="/safety">Safety</a>
+                <a href="/parents">Parents</a>
+                <a href="/rules">Rules</a>
+                <div class="header-buttons">
+                    <div id="play" class="play-button"><a href="/play">Play Now!</a></div>
+                    <div id="fullscreen" class="header-button" style="display: none;">Full Screen</div>
+                    <div id="largescreen" class="header-button" style="display: none;">Large Screen</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Show fullscreen and largescreen buttons only on play page
+            if (window.location.pathname === '/play') {
+                document.getElementById('fullscreen').style.display = 'block';
+                document.getElementById('largescreen').style.display = 'block';
+                document.getElementById('play').style.display = 'none';
+            }
+        </script>
+        <div class="main">

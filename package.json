@@ -1,0 +1,24 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "CPAdventure website",
+  "main": "build.js",
+  "scripts": {
+    "dev": "nodemon --config nodemon.json dev.js",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clubpenguinadventure/web.git"
+  },
+  "author": "sky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clubpenguinadventure/web/issues"
+  },
+  "homepage": "https://github.com/clubpenguinadventure/web#readme",
+  "devDependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}

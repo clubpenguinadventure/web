@@ -1,0 +1,84 @@
+
+        <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+        <script src="https://media.cpadventure.net/assets/scripts/lib/phaser-cachebuster.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle/ruffle.min.js"></script>
+        <script>
+            window.HUB_URL = 'https://hub.cpadventure.net/';
+            window.ASSETS_BASE_URL = 'https://media.cpadventure.net/';
+        </script>
+        <script src="https://media.cpadventure.net/assets/scripts/client/yukon.bundle.min.js"></script>
+        <div class="game" id="game">
+            <input type="text" id='dummyForMobileKeyboard'
+                style='position: absolute; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0;' />
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const fullscreenButton = document.getElementById('fullscreen');
+                const largescreenButton = document.getElementById('largescreen');
+                const body = document.body;
+                let isLargeScreen = false;
+                fullscreenButton.addEventListener('click', () => {
+                    document.getElementById('header').style.display = 'none';
+                    document.getElementById('footer').style.display = 'none';
+                    const gameElement = document.getElementById('game');
+                    gameElement.style.maxWidth = '100vw';
+                    gameElement.style.maxHeight = '100vh';
+                    gameElement.style.height = '100vh';
+                    document.documentElement.requestFullscreen();
+                });
+                document.addEventListener('fullscreenchange', () => {
+                    if (!document.fullscreenElement) {
+                        smallScreen();
+                    }
+                });
+                largescreenButton.addEventListener('click', () => {
+                    const gameElement = document.getElementById('game');
+                    if (!isLargeScreen) {
+                        gameElement.style.maxWidth = '100vw';
+                        gameElement.style.maxHeight = '100vh';
+                    } else {
+                        gameElement.style.maxWidth = localStorage.getItem("scale") ? localStorage.getItem("scale") * 760 + 'px' : '1520px';
+                    }
+                    isLargeScreen = !isLargeScreen;
+                });
+                document.getElementById('game').style.maxWidth = localStorage.getItem("scale") ? parseInt(localStorage.getItem("scale")) * 760 + 'px' : '1520px';
+
+                function smallScreen() {
+                    const header = document.getElementById('header');
+                    const footer = document.getElementById('footer');
+                    header.style.display = 'flex';
+                    footer.style.display = 'block';
+                    const gameElement = document.getElementById('game');
+                    gameElement.style.maxWidth = localStorage.getItem("scale") ? localStorage.getItem("scale") * 760 + 'px' : '1520px';
+                    gameElement.style.height = `calc(100vh - ${header.offsetHeight}px - ${footer.offsetHeight}px)`; // Adjust height based on header
+                }
+                smallScreen();
+            });
+        </script>
+        <script>
+            var dummyBox = document.getElementById('dummyForMobileKeyboard');
+            dummyBox.onkeyup = () => {
+                processKey()
+            }
+
+            function processKey() {
+                dummyBox = document.getElementById('dummyForMobileKeyboard');
+                var e = new KeyboardEvent('keydown', {
+                    bubbles: true,
+                    cancelable: true,
+                    keyCode: dummyBox.value.charCodeAt(dummyBox.value.length - 1),
+                    key: dummyBox.value.substring(dummyBox.value.length - 1),
+                });
+                document.onkeydown(e);
+                dummyBox.remove()
+                var newDummy = document.createElement('input')
+                newDummy.type = 'text'
+                newDummy.id = 'dummyForMobileKeyboard'
+                newDummy.style = 'position: absolute; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0;'
+                document.body.appendChild(newDummy)
+                newDummy.focus()
+                newDummy.onkeyup = () => {
+                    processKey()
+                }
+            }
+        </script>
